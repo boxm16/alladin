@@ -7,6 +7,7 @@ package Controllers;
 
 import DAO.CustomerDao;
 import Models.Customer;
+import java.util.ArrayList;
 
 /**
  *
@@ -22,6 +23,13 @@ public class CustomerController {
 
     public void addNewCustomer(Customer customer) {
         customerDao.insertCustomer(customer);
+    }
+
+    public ArrayList<Customer> populateCustomersTable() {
+        ArrayList<Customer> customers = new ArrayList<>();
+        customers = customerDao.listAllCustomers();
+        return customers;
+
     }
 
 }
