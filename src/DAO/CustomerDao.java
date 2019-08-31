@@ -48,17 +48,56 @@ public class CustomerDao {
         String customersQuery = "SELECT * FROM alladin.customer;";
         try (Statement statement = connection.createStatement()) {
             ResultSet rs = statement.executeQuery(customersQuery);
-            while(rs.next()) {
-            Customer customer=new Customer();
-            customer.setCustomer_id(rs.getInt("customer_id"));
-            customer.setFirstName(rs.getString("first_name"));
-            customers.add(customer);
+
+            Customer customer = new Customer();
+
+            while (rs.next()) {
+                customer = fillCustomerFromResultSet(rs);
+                customers.add(customer);
             }
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
 
         }
         return customers;
+    }
+
+    public Customer getCustomerById(int customer_id) {
+        Customer customer = null;
+        String getCustomerByIdQuery = "SELECT * FROM alladin.customer WHERE customer_id=" + customer_id + "";
+
+        try (Statement statement = connection.createStatement()) {
+            ResultSet rs = statement.executeQuery(getCustomerByIdQuery);
+            while (rs.next()) {
+                customer = fillCustomerFromResultSet(rs);
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        return customer;
+    }
+
+    private Customer fillCustomerFromResultSet(ResultSet rs) {
+        Customer customer = new Customer();
+        try {
+
+            customer.setCustomer_id(rs.getInt("customer_id"));
+            customer.setFirstName(rs.getString("first_name"));
+            customer.setLastName(rs.getString("last_name"));
+            customer.setStreet(rs.getString("street"));
+            customer.setDistrict(rs.getString("district"));
+            customer.setLandlinePhone(rs.getString("landline_phone"));
+            customer.setMobilePhone(rs.getString("mobile_phone"));
+            customer.setFloor(rs.getString("floor"));
+            customer.setPostalCode(rs.getString("postal_code"));
+            customer.setNote(rs.getString("note"));
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return customer;
     }
 
 }

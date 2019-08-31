@@ -9,7 +9,11 @@ import Controllers.CustomerController;
 import Models.Customer;
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -17,11 +21,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SearchFrame extends javax.swing.JFrame {
 
+    private MainFrame mainFrame;
+
     /**
      * Creates new form SearchFrame
+     *
      */
-    public SearchFrame() {
+    public SearchFrame(MainFrame mainFrame) {
         initComponents();
+        this.mainFrame = mainFrame;
     }
 
     /**
@@ -38,7 +46,7 @@ public class SearchFrame extends javax.swing.JFrame {
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jFormattedTextField2 = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -70,12 +78,12 @@ public class SearchFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -85,9 +93,10 @@ public class SearchFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jFormattedTextField1))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jFormattedTextField1)))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap())
         );
 
@@ -102,6 +111,11 @@ public class SearchFrame extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        jScrollPane2.setAlignmentX(0.0F);
+        jScrollPane2.setAlignmentY(0.0F);
+        jScrollPane2.setAutoscrolls(true);
+
+        jTable1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -110,7 +124,15 @@ public class SearchFrame extends javax.swing.JFrame {
                 "customer_id", "first_name"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,7 +141,9 @@ public class SearchFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1713, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 17, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -130,7 +154,7 @@ public class SearchFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane2)))
         );
 
         pack();
@@ -139,62 +163,93 @@ public class SearchFrame extends javax.swing.JFrame {
 
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
 
-        if (evt.getKeyCode()==10) {
+        if (evt.getKeyCode() == 10) {
             CustomerController customerController = new CustomerController();
             ArrayList<Customer> customers = customerController.populateCustomersTable();
             DefaultTableModel model = new DefaultTableModel();
 
-            Object[] columnsName = new Object[2];
+            Object[] columnsName = new Object[11];
 
             columnsName[0] = "Id";
-            columnsName[1] = "First Name";
+            columnsName[1] = "ΟΝΟΜΑ";
+            columnsName[2] = "ΕΠΙΘΕΤΟ";
+            columnsName[3] = "ΣΤΑΘΕΡΟ ΤΗΛΕΦΩΝΟ";
+            columnsName[4] = "ΚΙΝΗΤΟ ΤΗΛΕΦΩΝΟ";
+            columnsName[5] = "ΟΔΟΣ";
+            columnsName[6] = "ΠΕΡΙΟΧΗ";
+            columnsName[7] = "ΟΡΟΦΟΣ";
+            columnsName[8] = "Τ.Κ.";
+            columnsName[9] = "ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΙ";
+            columnsName[10] = "ΣΗΜΕΙΩΣΕΙΣ";
             model.setColumnIdentifiers(columnsName);
-            Object[] tableRow = new Object[2];
+            Object[] tableRow = new Object[11];
             for (int i = 0; i < customers.size(); i++) {
 
                 tableRow[0] = customers.get(i).getCustomer_id();
                 tableRow[1] = customers.get(i).getFirstName();
+                tableRow[2] = customers.get(i).getLastName();
+                tableRow[3] = customers.get(i).getLandlinePhone();
+                tableRow[4] = customers.get(i).getMobilePhone();
+                tableRow[5] = customers.get(i).getStreet();
+                tableRow[6] = customers.get(i).getDistrict();
+                tableRow[7] = customers.get(i).getFloor();
+                tableRow[8] = customers.get(i).getPostalCode();
+                tableRow[9] = customers.get(i).getNameOnBell();
+                tableRow[10] = customers.get(i).getFirstName();
+
                 model.addRow(tableRow);
             }
+            jTable1.setRowHeight(50);
 
+            //columnModel.getColumn(0).setPreferredWidth(50);
             jTable1.setModel(model);
+            TableColumnModel columnModel = jTable1.getColumnModel();
+            columnModel.getColumn(0).setPreferredWidth(10);
+            columnModel.getColumn(1).setPreferredWidth(300);
+            columnModel.getColumn(2).setPreferredWidth(200);
+            columnModel.getColumn(3).setPreferredWidth(50);
+            columnModel.getColumn(4).setPreferredWidth(50);
+            columnModel.getColumn(5).setPreferredWidth(50);
+            columnModel.getColumn(6).setPreferredWidth(50);
+            columnModel.getColumn(7).setPreferredWidth(50);
+            columnModel.getColumn(8).setPreferredWidth(50);
+
+            columnModel.getColumn(9).setPreferredWidth(50);
+            columnModel.getColumn(10).setPreferredWidth(50);
         }
     }//GEN-LAST:event_jTextField1KeyPressed
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+
+
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+        int i = jTable1.getSelectedRow();
+        //   System.out.println(i);
+        TableModel tableModel = jTable1.getModel();
+        Customer customer = new Customer();
+     //   customer.setCustomer_id(Integer.parseInt(tableModel.getValueAt(i, 1).toString()));
+        customer.setFirstName(tableModel.getValueAt(i, 2).toString());
+        customer.setLastName(tableModel.getValueAt(i, 3).toString());
+        customer.setLandlinePhone(tableModel.getValueAt(i, 4).toString());
+        customer.setMobilePhone(tableModel.getValueAt(i, 5).toString());
+        customer.setStreet(tableModel.getValueAt(i, 6).toString());
+        customer.setDistrict(tableModel.getValueAt(i, 7).toString());
+        customer.setFloor(tableModel.getValueAt(i, 8).toString());
+       // customer.setPostalCode(tableModel.getValueAt(i, 9).toString());
+        //customer.setNameOnBell(tableModel.getValueAt(i, 10).toString());
+
+        mainFrame.bulubulu(customer);
+        if (evt.getClickCount() == 2) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_jTable1MousePressed
+
     /**
      * @param args the command line arguments
+     *
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SearchFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SearchFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SearchFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SearchFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SearchFrame().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField jFormattedTextField1;
@@ -202,6 +257,7 @@ public class SearchFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
