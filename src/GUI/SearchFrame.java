@@ -163,60 +163,7 @@ public class SearchFrame extends javax.swing.JFrame {
 
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
 
-        if (evt.getKeyCode() == 10) {
-            CustomerController customerController = new CustomerController();
-            ArrayList<Customer> customers = customerController.populateCustomersTable();
-            DefaultTableModel model = new DefaultTableModel();
 
-            Object[] columnsName = new Object[11];
-
-            columnsName[0] = "Id";
-            columnsName[1] = "ΟΝΟΜΑ";
-            columnsName[2] = "ΕΠΙΘΕΤΟ";
-            columnsName[3] = "ΣΤΑΘΕΡΟ ΤΗΛΕΦΩΝΟ";
-            columnsName[4] = "ΚΙΝΗΤΟ ΤΗΛΕΦΩΝΟ";
-            columnsName[5] = "ΟΔΟΣ";
-            columnsName[6] = "ΠΕΡΙΟΧΗ";
-            columnsName[7] = "ΟΡΟΦΟΣ";
-            columnsName[8] = "Τ.Κ.";
-            columnsName[9] = "ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΙ";
-            columnsName[10] = "ΣΗΜΕΙΩΣΕΙΣ";
-            model.setColumnIdentifiers(columnsName);
-            Object[] tableRow = new Object[11];
-            for (int i = 0; i < customers.size(); i++) {
-
-                tableRow[0] = customers.get(i).getCustomer_id();
-                tableRow[1] = customers.get(i).getFirstName();
-                tableRow[2] = customers.get(i).getLastName();
-                tableRow[3] = customers.get(i).getLandlinePhone();
-                tableRow[4] = customers.get(i).getMobilePhone();
-                tableRow[5] = customers.get(i).getStreet();
-                tableRow[6] = customers.get(i).getDistrict();
-                tableRow[7] = customers.get(i).getFloor();
-                tableRow[8] = customers.get(i).getPostalCode();
-                tableRow[9] = customers.get(i).getNameOnBell();
-                tableRow[10] = customers.get(i).getFirstName();
-
-                model.addRow(tableRow);
-            }
-            jTable1.setRowHeight(50);
-
-            //columnModel.getColumn(0).setPreferredWidth(50);
-            jTable1.setModel(model);
-            TableColumnModel columnModel = jTable1.getColumnModel();
-            columnModel.getColumn(0).setPreferredWidth(10);
-            columnModel.getColumn(1).setPreferredWidth(300);
-            columnModel.getColumn(2).setPreferredWidth(200);
-            columnModel.getColumn(3).setPreferredWidth(50);
-            columnModel.getColumn(4).setPreferredWidth(50);
-            columnModel.getColumn(5).setPreferredWidth(50);
-            columnModel.getColumn(6).setPreferredWidth(50);
-            columnModel.getColumn(7).setPreferredWidth(50);
-            columnModel.getColumn(8).setPreferredWidth(50);
-
-            columnModel.getColumn(9).setPreferredWidth(50);
-            columnModel.getColumn(10).setPreferredWidth(50);
-        }
     }//GEN-LAST:event_jTextField1KeyPressed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -224,12 +171,69 @@ public class SearchFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTable1MouseClicked
 
+    public void CustomersList() {
+
+        CustomerController customerController = new CustomerController();
+        ArrayList<Customer> customers = customerController.populateCustomersTable();
+        DefaultTableModel model = new DefaultTableModel();
+
+        Object[] columnsName = new Object[11];
+
+        columnsName[0] = "Id";
+        columnsName[1] = "ΟΝΟΜΑ";
+        columnsName[2] = "ΕΠΙΘΕΤΟ";
+        columnsName[3] = "ΣΤΑΘΕΡΟ ΤΗΛΕΦΩΝΟ";
+        columnsName[4] = "ΚΙΝΗΤΟ ΤΗΛΕΦΩΝΟ";
+        columnsName[5] = "ΟΔΟΣ";
+        columnsName[6] = "ΠΕΡΙΟΧΗ";
+        columnsName[7] = "ΟΡΟΦΟΣ";
+        columnsName[8] = "Τ.Κ.";
+        columnsName[9] = "ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΙ";
+        columnsName[10] = "ΣΗΜΕΙΩΣΕΙΣ";
+        model.setColumnIdentifiers(columnsName);
+        Object[] tableRow = new Object[11];
+        for (int i = 0; i < customers.size(); i++) {
+
+            tableRow[0] = customers.get(i).getCustomer_id();
+            tableRow[1] = customers.get(i).getFirstName();
+            tableRow[2] = customers.get(i).getLastName();
+            tableRow[3] = customers.get(i).getLandlinePhone();
+            tableRow[4] = customers.get(i).getMobilePhone();
+            tableRow[5] = customers.get(i).getStreet();
+            tableRow[6] = customers.get(i).getDistrict();
+            tableRow[7] = customers.get(i).getFloor();
+            tableRow[8] = customers.get(i).getPostalCode();
+            tableRow[9] = customers.get(i).getNameOnBell();
+            tableRow[10] = customers.get(i).getFirstName();
+
+            model.addRow(tableRow);
+        }
+        jTable1.setRowHeight(50);
+
+        //columnModel.getColumn(0).setPreferredWidth(50);
+        jTable1.setModel(model);
+        TableColumnModel columnModel = jTable1.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(10);
+        columnModel.getColumn(1).setPreferredWidth(300);
+        columnModel.getColumn(2).setPreferredWidth(200);
+        columnModel.getColumn(3).setPreferredWidth(50);
+        columnModel.getColumn(4).setPreferredWidth(50);
+        columnModel.getColumn(5).setPreferredWidth(50);
+        columnModel.getColumn(6).setPreferredWidth(50);
+        columnModel.getColumn(7).setPreferredWidth(50);
+        columnModel.getColumn(8).setPreferredWidth(50);
+
+        columnModel.getColumn(9).setPreferredWidth(50);
+        columnModel.getColumn(10).setPreferredWidth(50);
+
+    }
+
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
         int i = jTable1.getSelectedRow();
         //   System.out.println(i);
         TableModel tableModel = jTable1.getModel();
         Customer customer = new Customer();
-     //   customer.setCustomer_id(Integer.parseInt(tableModel.getValueAt(i, 1).toString()));
+        //   customer.setCustomer_id(Integer.parseInt(tableModel.getValueAt(i, 1).toString()));
         customer.setFirstName(tableModel.getValueAt(i, 2).toString());
         customer.setLastName(tableModel.getValueAt(i, 3).toString());
         customer.setLandlinePhone(tableModel.getValueAt(i, 4).toString());
@@ -237,7 +241,7 @@ public class SearchFrame extends javax.swing.JFrame {
         customer.setStreet(tableModel.getValueAt(i, 6).toString());
         customer.setDistrict(tableModel.getValueAt(i, 7).toString());
         customer.setFloor(tableModel.getValueAt(i, 8).toString());
-       // customer.setPostalCode(tableModel.getValueAt(i, 9).toString());
+        // customer.setPostalCode(tableModel.getValueAt(i, 9).toString());
         //customer.setNameOnBell(tableModel.getValueAt(i, 10).toString());
 
         mainFrame.bulubulu(customer);
