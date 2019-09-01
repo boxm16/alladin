@@ -11,12 +11,16 @@ import Controllers.ProductController;
 import Models.Customer;
 import Models.Product;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JTabbedPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -24,11 +28,15 @@ import javax.swing.JTabbedPane;
  */
 public class MainFrame extends javax.swing.JFrame {
 
+    DefaultTableModel tableModel = new DefaultTableModel();
+
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setSize(screenSize.width, screenSize.height);
 
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -94,7 +102,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        IncomingItemsTable = new javax.swing.JTable();
         jPanel9 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -110,7 +118,7 @@ public class MainFrame extends javax.swing.JFrame {
         addItemBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(2000, 1102));
+        setMinimumSize(new java.awt.Dimension(800, 600));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -232,11 +240,11 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(tf_CustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(10, 10, 10)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(tf_LastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(ftf_PhoneL, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -524,7 +532,8 @@ public class MainFrame extends javax.swing.JFrame {
             .addGap(0, 261, Short.MAX_VALUE)
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        IncomingItemsTable.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        IncomingItemsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -535,7 +544,7 @@ public class MainFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(IncomingItemsTable);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -701,13 +710,14 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tf_Date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cb_ProductDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_ItemCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addGap(9, 9, 9)
-                                .addComponent(ProductID, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(ProductID, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(tf_Date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cb_ProductDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tf_ItemCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addGap(16, 16, 16)
@@ -877,6 +887,9 @@ public class MainFrame extends javax.swing.JFrame {
         ProductID.setBackground(Color.yellow);
         jComboBox1.setBackground(Color.yellow);
 
+        setCulomnHeaders();
+
+
     }//GEN-LAST:event_addItemBtnActionPerformed
 
     private void jTabbedPane1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPane1FocusGained
@@ -1014,6 +1027,7 @@ public class MainFrame extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable IncomingItemsTable;
     private javax.swing.JTextArea ItemNote;
     private javax.swing.JComboBox<String> ProductID;
     private javax.swing.JButton addItemBtn;
@@ -1059,7 +1073,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lb_FirstName;
     private javax.swing.JTextArea ta_Note;
@@ -1078,4 +1091,30 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField tf_Street2;
     private javax.swing.JLabel φ;
     // End of variables declaration//GEN-END:variables
+
+    private void setCulomnHeaders() {
+
+        Object[] columnsName = new Object[6];
+        columnsName[0] = "Product Id";
+        columnsName[1] = "ΠΕΡΙΓΡΑΦΗ";
+        columnsName[2] = "ΚΩΔΙΚΟΣ";
+        columnsName[3] = "ΕΠΕΞΕΡΓΑΣΙΑ";
+        columnsName[4] = "ΠΡΟΣΘΕΤΗ ΕΠΕΞΕΡΓΑΣΙΑ";
+        columnsName[5] = "ΣΗΜΙΩΜΑ";
+
+        tableModel.setColumnIdentifiers(columnsName);
+
+        Object[] tableRow = new Object[6];
+        tableRow[0] = ProductID.getSelectedItem().toString();
+        tableRow[1] = cb_ProductDescription.getSelectedItem().toString();
+        tableRow[2] = tf_ItemCode.getText();
+        tableRow[3] = jComboBox1.getSelectedItem().toString();
+
+        tableModel.addRow(tableRow);
+        IncomingItemsTable.setModel(tableModel);
+    }
+
+    private void fillIncomingItemsTable(Object[] tableRow) {
+
+    }
 }
