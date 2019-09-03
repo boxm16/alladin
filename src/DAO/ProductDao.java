@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,7 +36,10 @@ public class ProductDao {
                 Product product = new Product();
                 product.setProduct_id(rs.getInt("product_id"));
                 product.setProduct_description(rs.getString("product_description"));
-                product.setProduct_price(rs.getDouble("product_price"));
+                product.setCleaning_price(rs.getDouble("cleaning_price"));
+                product.setStoring_price(rs.getDouble("storing_price"));
+                product.setMending_price(rs.getDouble("mending_price"));
+           
                 productsList.add(product);
             }
         } catch (SQLException ex) {
@@ -44,5 +48,7 @@ public class ProductDao {
         }
         return productsList;
     }
+
+  
 
 }

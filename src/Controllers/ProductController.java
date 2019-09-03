@@ -8,6 +8,7 @@ package Controllers;
 import DAO.ProductDao;
 import Models.Product;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -24,6 +25,17 @@ public class ProductController {
     public ArrayList<Product> getProductsList() {
         ArrayList<Product> productsList = productDao.getProductsList();
         return productsList;
+    }
+
+    public HashMap<Integer, Product> getProductsMap() {
+        HashMap<Integer, Product> productsMap = new HashMap<>();
+        ArrayList<Product> productsList = productDao.getProductsList();
+
+        for (Product product : productsList) {
+            productsMap.put(product.getProduct_id(), product);
+        }
+
+        return productsMap;
     }
 
 }

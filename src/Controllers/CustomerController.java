@@ -33,8 +33,7 @@ public class CustomerController {
     }
 
     public Customer getCustomerById(int customer_id) {
-        Customer customer = new Customer();
-        customer=customerDao.getCustomerById(customer_id);
+        Customer customer = customerDao.getCustomerById(customer_id);
 
         return customer;
     }

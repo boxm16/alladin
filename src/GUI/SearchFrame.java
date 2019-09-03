@@ -42,62 +42,21 @@ public class SearchFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jTextField1.setText("jTextField1");
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField1KeyPressed(evt);
-            }
-        });
-
-        try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextField1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-
-        try {
-            jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("69########")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextField2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGap(0, 1730, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextField1)))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap())
+            .addGap(0, 82, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -154,17 +113,14 @@ public class SearchFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
-
-
-    }//GEN-LAST:event_jTextField1KeyPressed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
@@ -233,16 +189,16 @@ public class SearchFrame extends javax.swing.JFrame {
         //   System.out.println(i);
         TableModel tableModel = jTable1.getModel();
         Customer customer = new Customer();
-        //   customer.setCustomer_id(Integer.parseInt(tableModel.getValueAt(i, 1).toString()));
-        customer.setFirstName(tableModel.getValueAt(i, 2).toString());
-        customer.setLastName(tableModel.getValueAt(i, 3).toString());
-        customer.setLandlinePhone(tableModel.getValueAt(i, 4).toString());
-        customer.setMobilePhone(tableModel.getValueAt(i, 5).toString());
-        customer.setStreet(tableModel.getValueAt(i, 6).toString());
-        customer.setDistrict(tableModel.getValueAt(i, 7).toString());
-        customer.setFloor(tableModel.getValueAt(i, 8).toString());
-        // customer.setPostalCode(tableModel.getValueAt(i, 9).toString());
-        //customer.setNameOnBell(tableModel.getValueAt(i, 10).toString());
+        customer.setCustomer_id(Integer.parseInt(tableModel.getValueAt(i, 0).toString()));
+        customer.setFirstName(tableModel.getValueAt(i, 1).toString());
+        customer.setLastName(tableModel.getValueAt(i, 2).toString());
+        customer.setLandlinePhone(tableModel.getValueAt(i, 3).toString());
+        customer.setMobilePhone(tableModel.getValueAt(i, 4).toString());
+        customer.setStreet(tableModel.getValueAt(i, 5).toString());
+        customer.setDistrict(tableModel.getValueAt(i, 6).toString());
+        customer.setFloor(tableModel.getValueAt(i, 7).toString());
+        customer.setPostalCode(tableModel.getValueAt(i, 8).toString());
+        customer.setNameOnBell(tableModel.getValueAt(i, 9).toString());
 
         mainFrame.bulubulu(customer);
         if (evt.getClickCount() == 2) {
@@ -256,13 +212,9 @@ public class SearchFrame extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

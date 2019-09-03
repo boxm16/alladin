@@ -13,11 +13,9 @@ public class Product {
 
     int product_id;
     String product_description;
-    double product_price;
-
-    public double getProduct_price() {
-        return product_price;
-    }
+    double cleaning_price;
+    double storing_price;
+    double mending_price;
 
     public void setProduct_id(int product_id) {
         this.product_id = product_id;
@@ -25,6 +23,18 @@ public class Product {
 
     public void setProduct_description(String product_description) {
         this.product_description = product_description;
+    }
+
+    public void setCleaning_price(double cleaning_price) {
+        this.cleaning_price = cleaning_price;
+    }
+
+    public void setStoring_price(double storing_price) {
+        this.storing_price = storing_price;
+    }
+
+    public void setMending_price(double mending_price) {
+        this.mending_price = mending_price;
     }
 
     public int getProduct_id() {
@@ -35,8 +45,16 @@ public class Product {
         return product_description;
     }
 
-    public void setProduct_price(double product_price) {
-        this.product_price = product_price;
+    public double getCleaning_price() {
+        return cleaning_price;
+    }
+
+    public double getStoring_price() {
+        return storing_price;
+    }
+
+    public double getMending_price() {
+        return mending_price;
     }
     
 
