@@ -7,6 +7,7 @@ package Controllers;
 
 import DAO.CustomerDao;
 import Models.Customer;
+import Models.Item;
 import java.util.ArrayList;
 
 /**
@@ -37,5 +38,6 @@ public class CustomerController {
 
         return customer;
     }
+
 
 }

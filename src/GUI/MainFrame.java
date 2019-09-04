@@ -34,6 +34,9 @@ import javax.swing.table.TableModel;
 public class MainFrame extends javax.swing.JFrame {
 
     DefaultTableModel tableModel = new DefaultTableModel();
+    DefaultTableModel measurmentTable = new DefaultTableModel();
+    DefaultTableModel customerItems = new DefaultTableModel();
+    DefaultTableModel customerItems2 = new DefaultTableModel();
 
     /**
      * Creates new form MainFrame
@@ -91,6 +94,11 @@ public class MainFrame extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jButton9 = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -110,6 +118,14 @@ public class MainFrame extends javax.swing.JFrame {
         jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox3 = new javax.swing.JCheckBox();
         addItemBtn = new javax.swing.JButton();
+        jPanel10 = new javax.swing.JPanel();
+        ItemCode = new javax.swing.JTextField();
+        Length = new javax.swing.JTextField();
+        Width = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -418,15 +434,65 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jTable2.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable2.setRowHeight(30);
+        jScrollPane5.setViewportView(jTable2);
+
+        jButton9.setText("jButton9");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane6.setViewportView(jTable3);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1717, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1553, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane6))
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1305, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(699, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("ΚΑΡΤΕΛΑ ", jPanel3);
@@ -677,6 +743,103 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("ΝΕΑ ΠΑΡΑΛΑΒΗ", jPanel5);
+
+        ItemCode.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        ItemCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemCodeActionPerformed(evt);
+            }
+        });
+        ItemCode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ItemCodeKeyPressed(evt);
+            }
+        });
+
+        Length.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        Length.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                LengthKeyPressed(evt);
+            }
+        });
+
+        Width.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        Width.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                WidthKeyPressed(evt);
+            }
+        });
+
+        jTable1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ΚΟΔΙΚΟΣ", "ΜΗΚΟΣ", "ΠΛΑΤΟΣ"
+            }
+        ));
+        jTable1.setRowHeight(34);
+        jScrollPane4.setViewportView(jTable1);
+
+        jButton7.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jButton7.setText("jButton7");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jButton8.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jButton8.setText("SAVE");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(ItemCode, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Length, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Width, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(156, 156, 156)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(480, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ItemCode, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Length, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Width, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(170, 170, 170)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(835, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("ΜΕΤΡΗΣΗ", jPanel10);
 
         jButton6.setText("ΑΠΟΘΗΚΕΥΣΗ ΔΕΛΤΙΟΥ ΠΑΡΑΛΑΒΗΣ");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -1041,6 +1204,148 @@ public class MainFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void ItemCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemCodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ItemCodeActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        Object[] column = new Object[3];
+        column[0] = "ΚΩΔΙΚΟΣ";
+        column[1] = "ΜΗΚΟΣ";
+        column[2] = "ΠΛΑΤΟΣ";
+        Object[] row = new Object[3];
+        row[0] = ItemCode.getText();
+        row[1] = Length.getText();
+        row[2] = Width.getText();
+        jTable1.setModel(measurmentTable);
+        measurmentTable.setColumnIdentifiers(column);
+        measurmentTable.addRow(row);
+
+
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void ItemCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ItemCodeKeyPressed
+        if (evt.getKeyCode() == 10) {
+            Length.requestFocus();
+
+        }
+    }//GEN-LAST:event_ItemCodeKeyPressed
+
+    private void LengthKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LengthKeyPressed
+        if (evt.getKeyCode() == 10) {
+            Width.requestFocus();
+        }
+    }//GEN-LAST:event_LengthKeyPressed
+
+    private void WidthKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_WidthKeyPressed
+        if (evt.getKeyCode() == 10) {
+            jButton7.doClick();
+            ItemCode.requestFocus();
+        }
+    }//GEN-LAST:event_WidthKeyPressed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        ArrayList<Item> itemsList = new ArrayList();
+        TableModel tableModel = jTable1.getModel();
+        int x = tableModel.getRowCount();
+        for (int i = 0; i < x; i++) {
+            Item item = new Item();
+            item.setItemCode(Integer.parseInt(tableModel.getValueAt(i, 0).toString()));
+            item.setLength(Double.parseDouble(tableModel.getValueAt(i, 1).toString()));
+            item.setWidth(Double.parseDouble(tableModel.getValueAt(i, 2).toString()));
+            itemsList.add(item);
+        }
+
+        ItemController itemController = new ItemController();
+        itemController.insertItemsDimensions(itemsList);
+
+
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        ArrayList<Item> customersItems;
+        ItemController customerController = new ItemController();
+        int customer_id = Integer.parseInt(tf_CustomerId.getText());
+
+        customersItems = customerController.getCustomerItems(customer_id);
+        addHeaders();
+        addHeaders2();
+        populateTable(customersItems);
+        populateTable2(customersItems);
+
+    }//GEN-LAST:event_jButton9ActionPerformed
+    private void addHeaders() {
+        Object[] columns = new Object[7];
+        columns[0] = "Product ID";
+        columns[1] = "Product Description";
+        columns[2] = "Item Code";
+        columns[3] = "Cleaning";
+        columns[4] = "Storing";
+        columns[5] = "Mending";
+
+        columns[6] = "Note";
+        customerItems.setColumnIdentifiers(columns);
+    }
+
+    private void addHeaders2() {
+        Object[] columns = new Object[12];
+        columns[0] = "Product ID";
+        columns[1] = "Product Description";
+        columns[2] = "Item Code";
+
+        columns[3] = "Length";
+        columns[4] = "Width";
+        columns[5] = "Cleaning Price per m2";
+        columns[6] = "Storing Price per m2";
+        columns[7] = "Mending Price per m2";
+        columns[8] = "Cleaning Charge";
+        columns[9] = "Storing Charge";
+        columns[10] = "Mending Charge";
+        columns[11] = "Total Charge";
+
+        customerItems2.setColumnIdentifiers(columns);
+    }
+
+    private void populateTable(ArrayList<Item> customersItem) {
+
+        for (Item item : customersItem) {
+            Object[] row = new Object[7];
+            row[0] = item.getProduct_id();
+            row[1] = item.getProduct_description();
+            row[2] = item.getItemCode();
+            row[3] = item.getCleaning();
+            row[4] = item.getStoring();
+            row[5] = item.getMending();
+
+            row[6] = item.getNote();
+
+            customerItems.addRow(row);
+        }
+        jTable2.setModel(customerItems);
+    }
+
+    private void populateTable2(ArrayList<Item> customersItem) {
+
+        for (Item item : customersItem) {
+            Object[] row = new Object[12];
+            row[0] = item.getProduct_id();
+            row[1] = item.getProduct_description();
+            row[2] = item.getItemCode();
+
+            row[3] = item.getLength();
+            row[4] = item.getWidth();
+            row[5] = item.getCleaning_price();
+            row[6] = item.getStoring_price();
+            row[7] = item.getMending_price();
+            row[8] = item.getCleaningCharge();
+            row[9] = item.getStoringCharge();
+            row[10] = item.getMendingCharge();
+
+            customerItems2.addRow(row);
+        }
+        jTable3.setModel(customerItems2);
+    }
+
     public void bulubulu(Customer customer) {
         tf_CustomerId.setText(Integer.toString(customer.getCustomer_id()));
         tf_FirstName.setText(customer.getFirstName());
@@ -1093,8 +1398,11 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable IncomingItemsTable;
+    private javax.swing.JTextField ItemCode;
     private javax.swing.JTextArea ItemNote;
+    private javax.swing.JTextField Length;
     private javax.swing.JComboBox<String> ProductID;
+    private javax.swing.JTextField Width;
     private javax.swing.JButton addItemBtn;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cb_ProductDescription;
@@ -1108,6 +1416,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -1127,6 +1438,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1139,7 +1451,13 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lb_FirstName;
     private javax.swing.JTextArea ta_Note;
@@ -1205,4 +1523,5 @@ public class MainFrame extends javax.swing.JFrame {
         tableModel.addRow(tableRow);
 
     }
+
 }
