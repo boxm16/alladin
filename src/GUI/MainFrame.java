@@ -28,6 +28,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -36,27 +38,44 @@ import javax.swing.table.TableModel;
  * @author Michail Sitmalidis
  */
 public class MainFrame extends javax.swing.JFrame {
-    
+
     DefaultTableModel tableModel = new DefaultTableModel();
     DefaultTableModel measurmentTable = new DefaultTableModel();
     DefaultTableModel customerItems = new DefaultTableModel();
     DefaultTableModel customerItems2 = new DefaultTableModel();
+    private int x = 0;
 
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
+
         initComponents();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setSize(screenSize.width, screenSize.height);
+
+        jTable3.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+   
+                int x=jTable3.getSelectedRow();
+                jTable2.setRowSelectionInterval(x, x);
+                
+                
+                
+            }
+
+        });
+
         jScrollPane6.getViewport().addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                
+
                 jScrollPane5.getViewport().setViewPosition(jScrollPane6.getViewport().getViewPosition());
-                
+                x++;
+                System.out.println("jakudza" + x);
             }
-            
+
         });
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -106,11 +125,13 @@ public class MainFrame extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
         jButton9 = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jButton10 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -446,25 +467,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane5.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-
-        jTable2.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jTable2.setGridColor(new java.awt.Color(51, 0, 51));
-        jTable2.setRowHeight(36);
-        jScrollPane5.setViewportView(jTable2);
-
         jButton9.setText("jButton9");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -496,7 +498,61 @@ public class MainFrame extends javax.swing.JFrame {
             }
         ));
         jTable3.setRowHeight(36);
+        jTable3.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jTable3PropertyChange(evt);
+            }
+        });
         jScrollPane6.setViewportView(jTable3);
+
+        jScrollPane5.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        jTable2.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable2.setAlignmentX(0.0F);
+        jTable2.setAlignmentY(0.0F);
+        jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTable2.setGridColor(new java.awt.Color(51, 0, 51));
+        jTable2.setRowHeight(36);
+        jScrollPane5.setViewportView(jTable2);
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jButton10.setText("jButton10");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -504,24 +560,25 @@ public class MainFrame extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(672, 672, 672)
+                        .addComponent(jButton10))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(173, Short.MAX_VALUE))
+                        .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton10))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(1025, Short.MAX_VALUE))
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(999, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("ΚΑΡΤΕΛΑ ", jPanel3);
@@ -1043,10 +1100,10 @@ public class MainFrame extends javax.swing.JFrame {
         customer.setPostalCode(ftf_PostalCode.getText());
         customer.setNameOnBell(tf_NameOnBell.getText());
         customer.setNote(ta_Note.getText());
-        
+
         CustomerController customerController = new CustomerController();
         customerController.addNewCustomer(customer);
-        
+
         tf_LastName.setText("");
         tf_FirstName.setText("");
         ftf_PhoneL.setText("");
@@ -1057,7 +1114,7 @@ public class MainFrame extends javax.swing.JFrame {
         ftf_PostalCode.setText("");
         tf_NameOnBell.setText("");
         ta_Note.setText("");
-        
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1100,10 +1157,10 @@ public class MainFrame extends javax.swing.JFrame {
         jTextField1.setBackground(Color.yellow);
         ItemNote.setBackground(Color.yellow);
         ProductID.setBackground(Color.yellow);
-        
+
         setCulomnHeaders();
         addTableRow();
-        
+
 
     }//GEN-LAST:event_addItemBtnActionPerformed
 
@@ -1112,12 +1169,12 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTabbedPane1FocusGained
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
-        
+
         JTabbedPane tabSource = (JTabbedPane) evt.getSource();
         String tab = tabSource.getTitleAt(tabSource.getSelectedIndex());
         if (tab.equals("ΝΕΑ ΠΑΡΑΛΑΒΗ")) {
             ProductController productController = new ProductController();
-            
+
             ProductID.removeAllItems();
             cb_ProductDescription.removeAllItems();
             ArrayList<Product> productsList = productController.getProductsList();
@@ -1125,9 +1182,9 @@ public class MainFrame extends javax.swing.JFrame {
                 cb_ProductDescription.addItem(product.getProduct_description());
                 ProductID.addItem(Integer.toString(product.getProduct_id()));
             }
-            
+
         }
-        
+
 
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
@@ -1144,9 +1201,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void cb_ProductDescriptionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cb_ProductDescriptionKeyPressed
         if (evt.getKeyCode() == 10) {
-            
+
             tf_ItemCode.requestFocus();
-            
+
         }
     }//GEN-LAST:event_cb_ProductDescriptionKeyPressed
 
@@ -1163,14 +1220,14 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void tf_ItemCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_ItemCodeKeyPressed
         if (evt.getKeyCode() == 10) {
-            
+
         }
     }//GEN-LAST:event_tf_ItemCodeKeyPressed
 
     private void ItemNoteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ItemNoteKeyPressed
         if (evt.getKeyCode() == 10) {
             addItemBtn.requestFocus();
-            
+
         }
 
     }//GEN-LAST:event_ItemNoteKeyPressed
@@ -1180,18 +1237,18 @@ public class MainFrame extends javax.swing.JFrame {
             ItemNote.requestFocus();
             ItemNote.setBackground(Color.blue);
         }
-        
+
         if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
             jCheckBox1.setSelected(true);
         }
     }//GEN-LAST:event_jCheckBox1KeyPressed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        
+
         ReceivingReport receivingReport = new ReceivingReport();
         receivingReport.setReceivingReportNumber(Integer.parseInt(jTextField1.getText()));
         receivingReport.setReceivingDate(tf_Date.getText());
-        
+
         Customer customer = new Customer();
         customer.setCustomer_id(Integer.parseInt(tf_CustomerId.getText()));
         customer.setLastName(tf_LastName.getText());
@@ -1204,17 +1261,17 @@ public class MainFrame extends javax.swing.JFrame {
         customer.setPostalCode(ftf_PostalCode.getText());
         customer.setNameOnBell(tf_NameOnBell.getText());
         customer.setNote(ta_Note.getText());
-        
+
         receivingReport.setCustomer(customer);
         ArrayList<Item> receivedItems = new ArrayList<>();
-        
+
         TableModel tableModel = IncomingItemsTable.getModel();
         // int columnCount = tableModel.getColumnCount();
         int rowCount = tableModel.getRowCount();
-        
+
         for (int i = 0; i < rowCount; i++) {
             Item item = new Item();
-            
+
             item.setProduct_id(Integer.parseInt(tableModel.getValueAt(i, 0).toString()));
             item.setItemCode(Integer.parseInt(tableModel.getValueAt(i, 2).toString()));
             item.setCleaning(tableModel.getValueAt(i, 3).toString());
@@ -1222,9 +1279,9 @@ public class MainFrame extends javax.swing.JFrame {
             item.setMending(tableModel.getValueAt(i, 5).toString());
             item.setNote(tableModel.getValueAt(i, 6).toString());
             item.setReceivingReportId(Integer.parseInt(jTextField1.getText()));
-            
+
             receivedItems.add(item);
-            
+
         }
         receivingReport.setReceivedItems(receivedItems);
         ItemController itemController = new ItemController();
@@ -1248,14 +1305,14 @@ public class MainFrame extends javax.swing.JFrame {
         jTable1.setModel(measurmentTable);
         measurmentTable.setColumnIdentifiers(column);
         measurmentTable.addRow(row);
-        
+
 
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void ItemCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ItemCodeKeyPressed
         if (evt.getKeyCode() == 10) {
             Length.requestFocus();
-            
+
         }
     }//GEN-LAST:event_ItemCodeKeyPressed
 
@@ -1283,10 +1340,10 @@ public class MainFrame extends javax.swing.JFrame {
             item.setWidth(Double.parseDouble(tableModel.getValueAt(i, 2).toString()));
             itemsList.add(item);
         }
-        
+
         ItemController itemController = new ItemController();
         itemController.insertItemsDimensions(itemsList);
-        
+
 
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -1294,7 +1351,7 @@ public class MainFrame extends javax.swing.JFrame {
         ArrayList<Item> customersItems;
         ItemController customerController = new ItemController();
         int customer_id = Integer.parseInt(tf_CustomerId.getText());
-        
+
         customersItems = customerController.getCustomerItems(customer_id);
         addHeaders();
         addHeaders2();
@@ -1302,7 +1359,7 @@ public class MainFrame extends javax.swing.JFrame {
         customerItems2.setRowCount(0);
         populateTable(customersItems);
         populateTable2(customersItems);
-        
+
 
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -1313,84 +1370,96 @@ public class MainFrame extends javax.swing.JFrame {
     private void jScrollPane6MouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_jScrollPane6MouseWheelMoved
         jScrollPane5.getViewport().setViewPosition(jScrollPane6.getViewport().getViewPosition());        // TODO add your handling code here:
     }//GEN-LAST:event_jScrollPane6MouseWheelMoved
+
+    private void jTable3PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTable3PropertyChange
+
+    }//GEN-LAST:event_jTable3PropertyChange
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+
+       NewJFrame n=new NewJFrame();
+     
+       n.setVisible(true);
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButton10ActionPerformed
     private void addHeaders() {
         Object[] columns = new Object[16];
-        
+
         columns[0] = "Item Code";
         columns[1] = "Product Description";
-        
+
         columns[2] = "Cleaning";
         columns[3] = "Storing";
         columns[4] = "Mending";
-        
+
         columns[5] = "Cleaning Price per m2";
         columns[6] = "Storing Price per m2";
         columns[7] = "Mending Price per m2";
-        
+
         columns[8] = "Length";
         columns[9] = "Width";
         columns[10] = "Total m2";
-        
+
         columns[11] = "Cleaning Charge";
         columns[12] = "Storing Charge";
         columns[13] = "Mending Charge";
-        
+
         columns[14] = "Total Charge";
-        
+
         columns[15] = "Note";
         customerItems.setColumnIdentifiers(columns);
-        
+
         jTable2.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 36));
         jTable3.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 36));
     }
-    
+
     private void addHeaders2() {
         Object[] columns = new Object[1];
-        
+
         columns[0] = "Total";
-        
+
         customerItems2.setColumnIdentifiers(columns);
     }
-    
+
     private void populateTable(ArrayList<Item> customersItem) {
-        
+
         for (Item item : customersItem) {
             Object[] row = new Object[16];
             // row[0] = item.getProduct_id();
             row[0] = item.getItemCode();
             row[1] = item.getProduct_description();
-            
+
             row[2] = item.getCleaning();
             row[3] = item.getStoring();
             row[4] = item.getMending();
-            
+
             row[5] = item.getCleaning_price();
             row[6] = item.getStoring_price();
             row[7] = item.getMending_price();
-            
+
             row[8] = item.getLength();
             row[9] = item.getWidth();
             row[10] = item.getLength() * item.getWidth();
-            
+
             row[11] = item.getCleaningCharge();
             row[12] = item.getStoringCharge();
             row[13] = item.getMendingCharge();
-            
+
             row[15] = item.getNote();
-            
+
             customerItems.addRow(row);
         }
         jTable2.setModel(customerItems);
     }
-    
+
     private void populateTable2(ArrayList<Item> customersItem) {
-        
+
         for (Item item : customersItem) {
             Object[] row = new Object[12];
             Double c = 0.0;
             Double s = 0.0;
             Double m = 0.0;
-            
+
             if (item.getCleaningCharge() != null) {
                 c = item.getCleaningCharge();
             }
@@ -1401,12 +1470,12 @@ public class MainFrame extends javax.swing.JFrame {
                 m = item.getMendingCharge();
             }
             row[0] = c + s + m;
-            
+
             customerItems2.addRow(row);
         }
         jTable3.setModel(customerItems2);
     }
-    
+
     public void bulubulu(Customer customer) {
         tf_CustomerId.setText(Integer.toString(customer.getCustomer_id()));
         tf_FirstName.setText(customer.getFirstName());
@@ -1472,6 +1541,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField ftf_PostalCode;
     private javax.swing.JFormattedTextField ftf_PostalCode2;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1501,6 +1571,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1539,7 +1610,7 @@ public class MainFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void setCulomnHeaders() {
-        
+
         Object[] columnsName = new Object[7];
         columnsName[0] = "Product Id";
         columnsName[1] = "ΠΕΡΙΓΡΑΦΗ";
@@ -1548,18 +1619,18 @@ public class MainFrame extends javax.swing.JFrame {
         columnsName[4] = "ΦΥΛΑΞΗ";
         columnsName[5] = "ΕΠΙΔΙΟΡΘΩΣΗ";
         columnsName[6] = "ΣΗΜΕΙΩΜΑ";
-        
+
         tableModel.setColumnIdentifiers(columnsName);
         IncomingItemsTable.setModel(tableModel);
-        
+
     }
-    
+
     private void fillIncomingItemsTable(Object[] tableRow) {
-        
+
     }
-    
+
     private void addTableRow() {
-        
+
         Object[] tableRow = new Object[7];
         tableRow[0] = ProductID.getSelectedItem().toString();
         tableRow[1] = cb_ProductDescription.getSelectedItem().toString();
@@ -1579,10 +1650,10 @@ public class MainFrame extends javax.swing.JFrame {
         } else {
             tableRow[5] = "-";
         }
-        
+
         tableRow[6] = ItemNote.getText();
         tableModel.addRow(tableRow);
-        
+
     }
-    
+
 }
