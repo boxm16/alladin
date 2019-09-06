@@ -43,6 +43,7 @@ public class MainFrame extends javax.swing.JFrame {
     DefaultTableModel measurmentTable = new DefaultTableModel();
     DefaultTableModel customerItems = new DefaultTableModel();
     DefaultTableModel customerItems2 = new DefaultTableModel();
+    DefaultTableModel customerItems3 = new DefaultTableModel();
     private int x = 0;
 
     /**
@@ -57,12 +58,10 @@ public class MainFrame extends javax.swing.JFrame {
         jTable3.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-   
-                int x=jTable3.getSelectedRow();
+
+                int x = jTable3.getSelectedRow();
                 jTable2.setRowSelectionInterval(x, x);
-                
-                
-                
+                jTable4.setRowSelectionInterval(x, x);
             }
 
         });
@@ -72,6 +71,8 @@ public class MainFrame extends javax.swing.JFrame {
             public void stateChanged(ChangeEvent e) {
 
                 jScrollPane5.getViewport().setViewPosition(jScrollPane6.getViewport().getViewPosition());
+                jScrollPane7.getViewport().setViewPosition(jScrollPane6.getViewport().getViewPosition());
+              
                 x++;
                 System.out.println("jakudza" + x);
             }
@@ -131,6 +132,8 @@ public class MainFrame extends javax.swing.JFrame {
         jTable3 = new javax.swing.JTable();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
         jButton10 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -474,6 +477,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane6.setBorder(null);
         jScrollPane6.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
             public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
                 jScrollPane6MouseWheelMoved(evt);
@@ -505,6 +509,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jScrollPane6.setViewportView(jTable3);
 
+        jScrollPane5.setBorder(null);
         jScrollPane5.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         jTable2.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
@@ -526,13 +531,31 @@ public class MainFrame extends javax.swing.JFrame {
         jTable2.setRowHeight(36);
         jScrollPane5.setViewportView(jTable2);
 
+        jScrollPane7.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        jTable4.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "ΚΩΔΙΚΟΣ", "ΠΕΡΙΓΡΑΦΗ"
+            }
+        ));
+        jTable4.setRowHeight(36);
+        jScrollPane7.setViewportView(jTable4);
+
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 843, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -540,11 +563,11 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
 
         jButton10.setText("jButton10");
@@ -578,7 +601,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jButton10))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(999, Short.MAX_VALUE))
+                .addContainerGap(790, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("ΚΑΡΤΕΛΑ ", jPanel3);
@@ -1355,11 +1378,13 @@ public class MainFrame extends javax.swing.JFrame {
         customersItems = customerController.getCustomerItems(customer_id);
         addHeaders();
         addHeaders2();
+        addHeaders3();
         customerItems.setRowCount(0);
         customerItems2.setRowCount(0);
+        customerItems3.setRowCount(0);
         populateTable(customersItems);
         populateTable2(customersItems);
-
+        populateTable3(customersItems);
 
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -1377,9 +1402,12 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
 
-       NewJFrame n=new NewJFrame();
-     
-       n.setVisible(true);
+        NewJFrame n = new NewJFrame();
+        
+        
+        
+
+        n.setVisible(true);
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
     private void addHeaders() {
@@ -1411,6 +1439,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTable2.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 36));
         jTable3.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 36));
+        jTable4.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 36));
     }
 
     private void addHeaders2() {
@@ -1586,10 +1615,12 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lb_FirstName;
     private javax.swing.JTextArea ta_Note;
@@ -1654,6 +1685,30 @@ public class MainFrame extends javax.swing.JFrame {
         tableRow[6] = ItemNote.getText();
         tableModel.addRow(tableRow);
 
+    }
+
+    private void addHeaders3() {
+
+        Object[] columns = new Object[2];
+
+        columns[0] = "ΚΩΔΙΚΟΣ";
+        columns[1] = "ΠΕΡΙΓΡΑΦΗ";
+
+        customerItems3.setColumnIdentifiers(columns);
+
+    }
+
+    private void populateTable3(ArrayList<Item> customersItems) {
+
+        for (Item item : customersItems) {
+            Object[] row = new Object[2];
+            // row[0] = item.getProduct_id();
+            row[0] = item.getItemCode();
+            row[1] = item.getProduct_description();
+
+            customerItems3.addRow(row);
+        }
+        jTable4.setModel(customerItems3);
     }
 
 }
