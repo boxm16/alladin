@@ -21,13 +21,13 @@ import java.util.logging.Logger;
  * @author Michail Sitmalidis
  */
 public class ItemDao {
-
+    
     Connection connection;
-
+    
     public ItemDao() {
         connection = DataBaseConnection.getDBCInstance().getConnection();
     }
-
+    
     public void insertReceivingReport(ReceivingReport receivingReport) {
         String insertReceivingReportQuery = "INSERT INTO alladin.receiving_report (receiving_date, receiving_report_number, customer_id) "
                 + "VALUES(?,?,?)";
@@ -35,17 +35,17 @@ public class ItemDao {
                 + " VALUES(?,?,?,?,?,?,?,?, (SELECT MAX(receiving_report_id) AS AUTO_INCREMENT FROM alladin.receiving_report ),?);";
         try (PreparedStatement insertReceivingReport = connection.prepareStatement(insertReceivingReportQuery);
                 PreparedStatement insertReceivedItem = connection.prepareStatement(insertReceivedItemQuery)) {
-
+            
             insertReceivingReport.setString(1, receivingReport.getReceivingDate());
             insertReceivingReport.setInt(2, receivingReport.getReceivingReportNumber());
             insertReceivingReport.setInt(3, receivingReport.getCustomer().getCustomer_id());
             insertReceivingReport.execute();
-
+            
             for (Item item : receivingReport.getReceivedItems()) {
-
+                
                 insertReceivedItem.setInt(1, item.getProduct_id());
                 insertReceivedItem.setInt(2, item.getItemCode());
-
+                
                 insertReceivedItem.setString(3, item.getCleaning());
                 insertReceivedItem.setString(4, item.getStoring());
                 insertReceivedItem.setString(5, item.getMending());
@@ -53,23 +53,23 @@ public class ItemDao {
                 insertReceivedItem.setDouble(7, 0.0);
                 insertReceivedItem.setDouble(8, 0.0);
                 insertReceivedItem.setString(9, item.getNote());
-
+                
                 insertReceivedItem.addBatch();
-
+                
             }
             insertReceivedItem.executeBatch();
-
+            
         } catch (SQLException ex) {
             Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
-
+            
         }
-
+        
     }
-
+    
     public void insertItemsDimesnions(ArrayList<Item> itemsList) {
         String insertItemsDimensionsQuery = "UPDATE alladin.item SET length=?, width=? WHERE item_code=?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(insertItemsDimensionsQuery)) {
-
+            
             for (Item item : itemsList) {
                 preparedStatement.setDouble(1, item.getLength());
                 preparedStatement.setDouble(2, item.getWidth());
@@ -79,11 +79,11 @@ public class ItemDao {
             preparedStatement.executeBatch();
         } catch (SQLException ex) {
             Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
-
+            
         }
-
+        
     }
-
+    
     public ArrayList<Item> getItemList(int customer_id) {
         ArrayList<Item> itemList = new ArrayList();
         String itemListQuery = "SELECT * FROM alladin.item "
@@ -93,7 +93,7 @@ public class ItemDao {
         try (PreparedStatement preparedStatement = connection.prepareStatement(itemListQuery)) {
             preparedStatement.setInt(1, customer_id);
             ResultSet rs = preparedStatement.executeQuery();
-
+            
             while (rs.next()) {
                 Item item = new Item();
                 item.setItemId(rs.getInt("item_id"));
@@ -104,7 +104,7 @@ public class ItemDao {
                 item.setMending_price(rs.getDouble("mending_price"));
                 item.setItemCode(rs.getInt("item_code"));
                 item.setLength(rs.getDouble("length"));
-
+                
                 item.setWidth(rs.getDouble("width"));
                 item.setCleaning(rs.getString("cleaning"));
                 item.setStoring(rs.getString("storing"));
@@ -122,15 +122,16 @@ public class ItemDao {
                 if (item.getMending().equals("*")) {
                     item.setMendingCharge(rs.getDouble("mending_price"));
                 }
+                item.setStatus(rs.getString("status"));
                 item.setNote(rs.getString("note"));
                 itemList.add(item);
             }
-
+            
         } catch (SQLException ex) {
             Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
-
+            
         }
         return itemList;
     }
-
+    
 }

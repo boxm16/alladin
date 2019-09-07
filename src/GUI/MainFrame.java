@@ -14,6 +14,7 @@ import Models.Item;
 import Models.Product;
 import Models.ReceivingReport;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -25,12 +26,15 @@ import java.util.Date;
 import java.util.HashMap;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 /**
@@ -72,16 +76,22 @@ public class MainFrame extends javax.swing.JFrame {
 
                 jScrollPane5.getViewport().setViewPosition(jScrollPane6.getViewport().getViewPosition());
                 jScrollPane7.getViewport().setViewPosition(jScrollPane6.getViewport().getViewPosition());
-              
+
                 x++;
                 System.out.println("jakudza" + x);
             }
 
         });
+//for rendning, row color change ,depended on ready-not ready;
+        jScrollPane5.setViewportView(getNewRenderedTable(jTable2));
+        jScrollPane7.setViewportView(getNewRenderedTable(jTable4));
+        jScrollPane6.setViewportView(getNewRenderedTable(jTable3));
+
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String date = simpleDateFormat.format(new Date());
         tf_Date.setText(date);
+
     }
 
     /**
@@ -492,13 +502,10 @@ public class MainFrame extends javax.swing.JFrame {
         jTable3.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+
             },
             new String [] {
-                "TOTAL"
+                "TOTAL", "Title 2", "Title 3"
             }
         ));
         jTable3.setRowHeight(36);
@@ -515,10 +522,7 @@ public class MainFrame extends javax.swing.JFrame {
         jTable2.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
@@ -536,10 +540,7 @@ public class MainFrame extends javax.swing.JFrame {
         jTable4.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "ΚΩΔΙΚΟΣ", "ΠΕΡΙΓΡΑΦΗ"
@@ -1361,6 +1362,7 @@ public class MainFrame extends javax.swing.JFrame {
             item.setItemCode(Integer.parseInt(tableModel.getValueAt(i, 0).toString()));
             item.setLength(Double.parseDouble(tableModel.getValueAt(i, 1).toString()));
             item.setWidth(Double.parseDouble(tableModel.getValueAt(i, 2).toString()));
+            item.setStatus("ready");
             itemsList.add(item);
         }
 
@@ -1403,38 +1405,32 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
 
         NewJFrame n = new NewJFrame();
-        
-        
-        
 
         n.setVisible(true);
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
     private void addHeaders() {
-        Object[] columns = new Object[16];
+        Object[] columns = new Object[14];
+        columns[0] = "hidden";
+        columns[1] = "Cleaning";
 
-        columns[0] = "Item Code";
-        columns[1] = "Product Description";
+        columns[2] = "Storing";
+        columns[3] = "Mending";
 
-        columns[2] = "Cleaning";
-        columns[3] = "Storing";
-        columns[4] = "Mending";
+        columns[4] = "Cleaning Price per m2";
+        columns[5] = "Storing Price per m2";
+        columns[6] = "Mending Price per m2";
 
-        columns[5] = "Cleaning Price per m2";
-        columns[6] = "Storing Price per m2";
-        columns[7] = "Mending Price per m2";
+        columns[7] = "Length";
+        columns[8] = "Width";
+        columns[9] = "Total m2";
 
-        columns[8] = "Length";
-        columns[9] = "Width";
-        columns[10] = "Total m2";
+        columns[10] = "Cleaning Charge";
+        columns[11] = "Storing Charge";
+        columns[12] = "Mending Charge";
 
-        columns[11] = "Cleaning Charge";
-        columns[12] = "Storing Charge";
-        columns[13] = "Mending Charge";
+        columns[13] = "Note";
 
-        columns[14] = "Total Charge";
-
-        columns[15] = "Note";
         customerItems.setColumnIdentifiers(columns);
 
         jTable2.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 36));
@@ -1443,9 +1439,10 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void addHeaders2() {
-        Object[] columns = new Object[1];
-
-        columns[0] = "Total";
+        Object[] columns = new Object[3];
+        columns[0] = "hidden";
+        columns[1] = "Total";
+        columns[2] = "-";
 
         customerItems2.setColumnIdentifiers(columns);
     }
@@ -1453,38 +1450,44 @@ public class MainFrame extends javax.swing.JFrame {
     private void populateTable(ArrayList<Item> customersItem) {
 
         for (Item item : customersItem) {
-            Object[] row = new Object[16];
+            Object[] row = new Object[14];
             // row[0] = item.getProduct_id();
-            row[0] = item.getItemCode();
-            row[1] = item.getProduct_description();
+            row[0] = item.getStatus();
+            row[1] = item.getCleaning();
 
-            row[2] = item.getCleaning();
-            row[3] = item.getStoring();
-            row[4] = item.getMending();
+            row[2] = item.getStoring();
+            row[3] = item.getMending();
 
-            row[5] = item.getCleaning_price();
-            row[6] = item.getStoring_price();
-            row[7] = item.getMending_price();
+            row[4] = item.getCleaning_price();
+            row[5] = item.getStoring_price();
+            row[6] = item.getMending_price();
 
-            row[8] = item.getLength();
-            row[9] = item.getWidth();
-            row[10] = item.getLength() * item.getWidth();
+            row[7] = item.getLength();
+            row[8] = item.getWidth();
+            row[9] = item.getLength() * item.getWidth();
 
-            row[11] = item.getCleaningCharge();
-            row[12] = item.getStoringCharge();
-            row[13] = item.getMendingCharge();
+            row[10] = item.getCleaningCharge();
+            row[11] = item.getStoringCharge();
+            row[12] = item.getMendingCharge();
 
-            row[15] = item.getNote();
+            row[13] = item.getNote();
 
             customerItems.addRow(row);
         }
+
         jTable2.setModel(customerItems);
+
+        //  jTable2.getColumnModel().getColumn(1).setMaxWidth(0);
+        //  jTable2.getColumnModel().getColumn(1).setMaxWidth(0);
+        //  jTable2.getColumnModel().getColumn(1).setWidth(0);
     }
 
     private void populateTable2(ArrayList<Item> customersItem) {
 
         for (Item item : customersItem) {
-            Object[] row = new Object[12];
+            Object[] row = new Object[3];
+
+            row[0] = item.getStatus();
             Double c = 0.0;
             Double s = 0.0;
             Double m = 0.0;
@@ -1498,11 +1501,15 @@ public class MainFrame extends javax.swing.JFrame {
             if (item.getMendingCharge() != null) {
                 m = item.getMendingCharge();
             }
-            row[0] = c + s + m;
+            row[1] = c + s + m;
 
+           
             customerItems2.addRow(row);
         }
         jTable3.setModel(customerItems2);
+        jTable3.getColumnModel().getColumn(0).setWidth(0);
+        jTable3.getColumnModel().getColumn(0).setMinWidth(0);
+        jTable3.getColumnModel().getColumn(0).setMaxWidth(0);
     }
 
     public void bulubulu(Customer customer) {
@@ -1689,10 +1696,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void addHeaders3() {
 
-        Object[] columns = new Object[2];
-
-        columns[0] = "ΚΩΔΙΚΟΣ";
-        columns[1] = "ΠΕΡΙΓΡΑΦΗ";
+        Object[] columns = new Object[3];
+        columns[0] = "hidden";
+        columns[1] = "ΚΩΔΙΚΟΣ";
+        columns[2] = "ΠΕΡΙΓΡΑΦΗ";
 
         customerItems3.setColumnIdentifiers(columns);
 
@@ -1701,14 +1708,66 @@ public class MainFrame extends javax.swing.JFrame {
     private void populateTable3(ArrayList<Item> customersItems) {
 
         for (Item item : customersItems) {
-            Object[] row = new Object[2];
+            Object[] row = new Object[3];
             // row[0] = item.getProduct_id();
-            row[0] = item.getItemCode();
-            row[1] = item.getProduct_description();
+            row[0] = item.getStatus();
+            row[1] = item.getItemCode();
+            row[2] = item.getProduct_description();
 
             customerItems3.addRow(row);
         }
         jTable4.setModel(customerItems3);
+        jTable4.getColumnModel().getColumn(0).setWidth(0);
+        jTable4.getColumnModel().getColumn(0).setMinWidth(0);
+        jTable4.getColumnModel().getColumn(0).setMaxWidth(0);
+    }
+
+    private JTable getNewRenderedTable(final JTable table) {
+        table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+                super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
+
+                final int STATUS_COL = 0;//checked column
+                String status = (String) table.getModel().getValueAt(row, STATUS_COL);
+
+                /*
+                ok, here is what i`m goona do. Create at each table one hidden column
+                  table.getColumnModel().getColumn(2).setMinWidth(0);
+                  table.getColumnModel().getColumn(2).setMaxWidth(0);
+                  table.getColumnModel().getColumn(2).setWidth(0);
+                this column i`ll populate with item status
+                (have to add this column to database and class)
+                
+                
+                 */
+                if (!"ready".equals(status)) {
+
+                    if (isSelected) {
+                        setBackground(Color.PINK);
+                        setForeground(table.getSelectionForeground());
+                    } else {
+                        setBackground(Color.RED);
+                        setForeground(Color.BLACK);
+                    }
+
+                } else {
+                    setBackground(table.getBackground());
+                    setForeground(table.getForeground());
+                    if (isSelected) {
+                        setBackground(table.getSelectionBackground());
+                        setForeground(table.getSelectionForeground());
+                    } else {
+                        setBackground(table.getBackground());
+                        setForeground(table.getForeground());
+                    }
+                }
+
+                return this;
+
+            }
+        });
+        return table;
     }
 
 }

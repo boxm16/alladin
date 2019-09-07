@@ -25,6 +25,18 @@ public class Item extends Product {
 
     private int receivingReportId;
     private int deliveryReportId;
+    
+    private String status;
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+    
+    
 
     public void setItemId(int ItemId) {
         this.ItemId = ItemId;
