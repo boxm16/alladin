@@ -35,15 +35,20 @@ public class NewJFrame extends javax.swing.JFrame {
         JScrollPane sc = new JScrollPane();
 
         jScrollPane1.setViewportView(getNewRenderedTable(jTable1));
-        
-         jScrollPane2.setViewportView(getNewRenderedTable(jTable2));
-        
+
+        jScrollPane2.setViewportView(getNewRenderedTable(jTable2));
+
         dtm = new DefaultTableModel(data, colNames);
         jTable2.setModel(dtm);
+        jTable1.setModel(dtm);
 
         TableColumn tc = jTable2.getColumnModel().getColumn(0);
         tc.setCellEditor(jTable2.getDefaultEditor(Boolean.class));
         tc.setCellRenderer(jTable2.getDefaultRenderer(Boolean.class));
+
+        TableColumn tc1 = jTable1.getColumnModel().getColumn(0);
+        tc1.setCellEditor(jTable1.getDefaultEditor(Boolean.class));
+        tc1.setCellRenderer(jTable1.getDefaultRenderer(Boolean.class));
 
         for (int x = 0; x < 5; x++) {
 
@@ -71,10 +76,11 @@ public class NewJFrame extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTable1.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        jTable1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"inactive", "", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -117,6 +123,13 @@ public class NewJFrame extends javax.swing.JFrame {
         jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane2.setViewportView(jTable2);
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,7 +137,9 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+                .addGap(40, 40, 40)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(110, 110, 110))
         );
@@ -136,10 +151,18 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(217, 217, 217))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.out.println(jTable1.getModel().getValueAt(0, 0));
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,6 +205,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

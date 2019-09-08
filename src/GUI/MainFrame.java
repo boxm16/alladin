@@ -24,9 +24,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import javax.swing.BoxLayout;
+import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import static javax.swing.JTable.AUTO_RESIZE_OFF;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -34,6 +37,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
@@ -48,6 +52,7 @@ public class MainFrame extends javax.swing.JFrame {
     DefaultTableModel customerItems = new DefaultTableModel();
     DefaultTableModel customerItems2 = new DefaultTableModel();
     DefaultTableModel customerItems3 = new DefaultTableModel();
+    DefaultTableModel customerItems4 = new DefaultTableModel();
     private int x = 0;
 
     /**
@@ -138,13 +143,16 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jButton9 = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jScrollPane7 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        Panel = new javax.swing.JPanel();
         jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -487,35 +495,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane6.setBorder(null);
-        jScrollPane6.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
-            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
-                jScrollPane6MouseWheelMoved(evt);
-            }
-        });
-        jScrollPane6.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jScrollPane6PropertyChange(evt);
-            }
-        });
-
-        jTable3.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "TOTAL", "Title 2", "Title 3"
-            }
-        ));
-        jTable3.setRowHeight(36);
-        jTable3.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jTable3PropertyChange(evt);
-            }
-        });
-        jScrollPane6.setViewportView(jTable3);
-
         jScrollPane5.setBorder(null);
         jScrollPane5.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
@@ -549,32 +528,94 @@ public class MainFrame extends javax.swing.JFrame {
         jTable4.setRowHeight(36);
         jScrollPane7.setViewportView(jTable4);
 
+        jScrollPane6.setBorder(null);
+        jScrollPane6.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                jScrollPane6MouseWheelMoved(evt);
+            }
+        });
+        jScrollPane6.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jScrollPane6PropertyChange(evt);
+            }
+        });
+
+        jTable3.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "TOTAL", "Title 2", "Title 3"
+            }
+        ));
+        jTable3.setRowHeight(36);
+        jTable3.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jTable3PropertyChange(evt);
+            }
+        });
+        jScrollPane6.setViewportView(jTable3);
+
+        Panel.setBackground(new java.awt.Color(0, 255, 0));
+
+        javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
+        Panel.setLayout(PanelLayout);
+        PanelLayout.setHorizontalGroup(
+            PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1521, Short.MAX_VALUE)
+        );
+        PanelLayout.setVerticalGroup(
+            PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 445, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 843, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(563, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(182, Short.MAX_VALUE))
+                    .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButton10.setText("jButton10");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
+            }
+        });
+
+        jButton11.setText("jButton11");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
+        jButton12.setText("jButton12");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
             }
         });
 
@@ -586,23 +627,30 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(672, 672, 672)
-                        .addComponent(jButton10))
+                        .addGap(184, 184, 184)
+                        .addComponent(jButton10)
+                        .addGap(371, 371, 371)
+                        .addComponent(jButton11)
+                        .addGap(99, 99, 99)
+                        .addComponent(jButton12))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10))
+                    .addComponent(jButton10, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton11)
+                        .addComponent(jButton12)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(790, Short.MAX_VALUE))
+                .addContainerGap(195, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("ΚΑΡΤΕΛΑ ", jPanel3);
@@ -849,7 +897,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(35, 35, 35))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1044, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("ΝΕΑ ΠΑΡΑΛΑΒΗ", jPanel5);
@@ -946,7 +994,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(835, Short.MAX_VALUE))
+                .addContainerGap(309, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("ΜΕΤΡΗΣΗ", jPanel10);
@@ -1104,7 +1152,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
-                        .addComponent(jTabbedPane1)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 822, Short.MAX_VALUE)
                         .addContainerGap())))
         );
 
@@ -1381,14 +1429,19 @@ public class MainFrame extends javax.swing.JFrame {
         addHeaders();
         addHeaders2();
         addHeaders3();
+        addHeaders4();
         customerItems.setRowCount(0);
         customerItems2.setRowCount(0);
         customerItems3.setRowCount(0);
+        customerItems4.setRowCount(0);
         populateTable(customersItems);
         populateTable2(customersItems);
         populateTable3(customersItems);
+        populateTable4(customersItems);
+
 
     }//GEN-LAST:event_jButton9ActionPerformed
+
 
     private void jScrollPane6PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jScrollPane6PropertyChange
 
@@ -1409,6 +1462,188 @@ public class MainFrame extends javax.swing.JFrame {
         n.setVisible(true);
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        ItemController itemController = new ItemController();
+        ArrayList<Item> items = itemController.getCustomerItems(Integer.parseInt(tf_CustomerId.getText()));
+        Object[] headers = new Object[10];
+        Object[] data = new Object[10];
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(headers);
+
+        DefaultTableModel model1 = new MyDefaultModel();
+        model1.setColumnIdentifiers(headers);
+
+        for (Item item : items) {
+            data[0] = item.getStatus();
+            data[1] = item.getItemCode();
+            data[2] = item.getProduct_description();
+            data[3] = item.getCleaning();
+            data[4] = item.getStoring();
+            data[5] = item.getMending();
+            data[6] = item.getCleaning_price();
+            data[7] = item.getStoring_price();
+            data[8] = item.getMending_price();
+            data[9] = new Boolean(true);
+            model.addRow(data);
+            model1.addRow(data);
+        }
+
+        Object[] columnNames = {"Type", "Company", "Shares", "Price", "Boolean"};
+        Object[][] data1
+                = {
+                    {"Buy", "IBM", new Integer(1000), new Double(80.5), Boolean.TRUE},
+                    {"Sell", "Dell", new Integer(2000), new Double(6.25), Boolean.FALSE},
+                    {"Short Sell", "Apple", new Integer(3000), new Double(7.35), Boolean.TRUE},
+                    {"Buy", "MicroSoft", new Integer(4000), new Double(27.50), Boolean.FALSE},
+                    {"Short Sell", "Cisco", new Integer(5000), new Double(20), Boolean.TRUE}
+                };
+
+        DefaultTableModel model2 = new DefaultTableModel(data1, columnNames) {
+            public Class getColumnClass(int column) {
+                return getValueAt(0, column).getClass();
+            }
+        };
+
+
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        Panel.removeAll();
+        DefaultTableModel model = new DefaultTableModel() {
+
+            boolean[] canEdit = new boolean[]{
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+
+            public Class getColumnClass(int column) {
+                return getValueAt(0, column).getClass();
+            }
+        };
+
+        Object[] columns = new Object[18];
+        columns[0] = "status";
+        columns[1] = "ΚΩΔΙΚΟΣ";
+        columns[2] = "ΠΕΡΙΓΡΑΦΗ";
+        columns[3] = "ΚΑΘΑΡΙΣΜΑ";
+        columns[4] = "ΦΥΛΑΞΗ";
+        columns[5] = "ΕΠΙΔΙΟΘΡΩΣΗ";
+        columns[6] = "ΤΙΜΗ ΓΙΑ ΚΑΘΑΡΙΣΜΑ";
+        columns[7] = "ΤΙΜΗ ΓΙΑ ΦΥΛΑΞΗ";
+        columns[8] = "ΤΙΜΗ ΓΙΑ ΕΠΙΔΙΟΡΘΩΣΗ";
+
+        columns[9] = "ΜΗΚΟΣ";
+        columns[10] = "ΠΛΑΟΤΟΣ";
+        columns[11] = "ΤΕΤΡΑΓΩΝΙΚΑ";
+
+        columns[12] = "ΧΡΕΩΣΗ ΓΙΑ ΚΑΘΑΡΙΣΜΑ";
+        columns[13] = "ΧΡΕΩΣΗ ΓΙΑ ΦΥΛΑΞΗ";
+        columns[14] = "ΧΡΕΩΣΗ ΓΙΑ ΕΠΙΔΙΟΡΘΩΣΗ";
+        columns[15] = "ΣΗΜΕΙΩΜΑ";
+
+        columns[16] = "ΣΥΝΟΛΟ ΧΡΕΩΣΗΣ ΤΕΜΑΧΙΟΥ";
+        columns[17] = "-";
+        model.setColumnIdentifiers(columns);
+        ItemController itemController = new ItemController();
+        ArrayList<Item> items = itemController.getCustomerItems(Integer.parseInt(tf_CustomerId.getText()));
+        for (Item item : items) {
+            Object[] row = new Object[18];
+            row[0] = item.getStatus();
+            row[1] = item.getItemCode();
+            row[2] = item.getProduct_description();
+            row[3] = item.getCleaning();
+            row[4] = item.getStoring();
+            row[5] = item.getMending();
+
+            row[6] = item.getCleaning_price();
+            row[7] = item.getStoring_price();
+            row[8] = item.getMending_price();
+
+            row[9] = item.getLength();
+            row[10] = item.getWidth();
+            Double s = item.getLength() * item.getWidth();
+            row[11] = s;
+            Double a, b, c;
+            row[12] = a = s * item.getCleaning_price();
+            row[13] = b = s * item.getStoring_price();
+            row[14] = c = s * item.getMending_price();
+
+            row[15] = item.getNote();
+
+            row[16] = a + b + c;
+
+            if (item.getStatus().equals("ready")) {
+                row[17] = Boolean.TRUE;
+            } else {
+                row[17] = Boolean.FALSE;
+            }
+
+            model.addRow(row);
+
+        }
+        JScrollPane sc = (JScrollPane) createTable(model);
+
+        Panel.add(sc);
+        Panel.setLayout(new BoxLayout(Panel, BoxLayout.LINE_AXIS));
+        Panel.setBackground(Color.red);
+        pack();
+
+
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private JComponent createTable(DefaultTableModel model) {
+        JTable table = new JTable(model) {
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                Component c = super.prepareRenderer(renderer, row, column);
+
+                //  Color row based on a cell value
+                if (!isRowSelected(row)) {
+                    c.setBackground(getBackground());
+                    int modelRow = convertRowIndexToModel(row);
+                    String type = (String) getModel().getValueAt(modelRow, 0);
+                    boolean oop = (boolean) getModel().getValueAt(modelRow, 17);
+                    if (!"ready".equals(type)) {
+                        model.setValueAt(false, modelRow, 17);
+                        c.setBackground(Color.RED);
+                    }
+                    if (oop) {
+                        c.setBackground(Color.GREEN);
+                    }
+
+                }
+                if (isRowSelected(row)) {
+                    //   c.setBackground(getBackground());
+                    int modelRow = convertRowIndexToModel(row);
+                    String type = (String) getModel().getValueAt(modelRow, 0);
+                    boolean oop = (boolean) getModel().getValueAt(modelRow, 17);
+
+                    if (!"ready".equals(type)) {
+                        model.setValueAt(false, modelRow, 17);
+                        c.setBackground(Color.PINK);
+                    }
+                }
+                return c;
+            }
+        };
+
+        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+        table.setRowHeight(36);
+
+        table.setFont(new java.awt.Font("Tahoma", 0, 30));
+        table.changeSelection(0, 0, false, false);
+        table.setAutoCreateRowSorter(true);
+        table.setAutoResizeMode(AUTO_RESIZE_OFF);
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setViewportView(table);
+
+        scrollPane.setPreferredSize(new Dimension(scrollPane.getPreferredSize().width, 300));
+        return scrollPane;
+    }
+
     private void addHeaders() {
         Object[] columns = new Object[14];
         columns[0] = "hidden";
@@ -1436,6 +1671,7 @@ public class MainFrame extends javax.swing.JFrame {
         jTable2.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 36));
         jTable3.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 36));
         jTable4.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 36));
+        //jTable5.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 36));
     }
 
     private void addHeaders2() {
@@ -1502,9 +1738,10 @@ public class MainFrame extends javax.swing.JFrame {
                 m = item.getMendingCharge();
             }
             row[1] = c + s + m;
+            row[2] = new Boolean(true);
 
-           
             customerItems2.addRow(row);
+
         }
         jTable3.setModel(customerItems2);
         jTable3.getColumnModel().getColumn(0).setWidth(0);
@@ -1537,7 +1774,7 @@ public class MainFrame extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("System".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -1567,6 +1804,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField ItemCode;
     private javax.swing.JTextArea ItemNote;
     private javax.swing.JTextField Length;
+    private javax.swing.JPanel Panel;
     private javax.swing.JComboBox<String> ProductID;
     private javax.swing.JTextField Width;
     private javax.swing.JButton addItemBtn;
@@ -1578,6 +1816,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField ftf_PostalCode2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1731,16 +1971,6 @@ public class MainFrame extends javax.swing.JFrame {
                 final int STATUS_COL = 0;//checked column
                 String status = (String) table.getModel().getValueAt(row, STATUS_COL);
 
-                /*
-                ok, here is what i`m goona do. Create at each table one hidden column
-                  table.getColumnModel().getColumn(2).setMinWidth(0);
-                  table.getColumnModel().getColumn(2).setMaxWidth(0);
-                  table.getColumnModel().getColumn(2).setWidth(0);
-                this column i`ll populate with item status
-                (have to add this column to database and class)
-                
-                
-                 */
                 if (!"ready".equals(status)) {
 
                     if (isSelected) {
@@ -1768,6 +1998,54 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         return table;
+    }
+
+    private void addHeaders4() {
+
+        Object[] columns = new Object[11];
+
+        columns[0] = "ΚΩΔΙΚΟΣ";
+        columns[1] = "ΠΕΡΙΓΡΑΦΗ";
+
+        columns[2] = "Cleaning";
+
+        columns[3] = "Storing";
+        columns[4] = "Mending";
+
+        columns[5] = "Cleaning Price per m2";
+        columns[6] = "Storing Price per m2";
+        columns[7] = "Mending Price per m2";
+
+        columns[8] = "Note";
+
+        customerItems4.setColumnIdentifiers(columns);
+
+    }
+
+    private void populateTable4(ArrayList<Item> customersItems) {
+
+        for (Item item : customersItems) {
+            Object[] row = new Object[11];
+            // row[0] = item.getProduct_id();
+            row[0] = item.getStatus();
+            row[1] = item.getItemCode();
+            row[2] = item.getProduct_description();
+
+            row[3] = item.getCleaning();
+
+            row[4] = item.getStoring();
+            row[5] = item.getMending();
+
+            row[6] = item.getCleaning_price();
+            row[7] = item.getStoring_price();
+            row[8] = item.getMending_price();
+
+            row[9] = item.getNote();
+            row[10] = new Boolean(true);
+
+            customerItems4.addRow(row);
+        }
+
     }
 
 }
