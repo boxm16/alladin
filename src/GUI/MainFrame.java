@@ -36,6 +36,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -684,7 +686,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(tf_Date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
+                        .addGap(50, 50, 50)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
@@ -981,17 +983,13 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jButton10)
-                                        .addGap(79, 79, 79)
-                                        .addComponent(jButton11))
-                                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                .addComponent(jButton10)
+                                .addGap(79, 79, 79)
+                                .addComponent(jButton11))
+                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
-                                .addComponent(jButton13)
-                                .addGap(134, 134, 134)))
+                                .addComponent(jButton13)))
                         .addGap(469, 469, 469)
                         .addComponent(jButton12)
                         .addGap(155, 155, 155)
@@ -1551,12 +1549,13 @@ public class MainFrame extends javax.swing.JFrame {
         Panel.removeAll();
         DefaultTableModel model = new DefaultTableModel() {
 
-            boolean[] canEdit = new boolean[]{
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true
-            };
-
+//overrideing for all the columns except 17 to be uneditable, and all the rows that are not 'ready' also uneditable 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                if (columnIndex == 17) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
 
             public Class getColumnClass(int column) {
@@ -1627,7 +1626,7 @@ public class MainFrame extends javax.swing.JFrame {
         JScrollPane sc = (JScrollPane) createTable(model);
 
         Panel.add(sc);
-       // Panel.setLayout(new BoxLayout(Panel, BoxLayout.LINE_AXIS));
+        Panel.setLayout(new BoxLayout(Panel, BoxLayout.LINE_AXIS));
         pack();
         countTotal(model);
 
@@ -1657,87 +1656,61 @@ public class MainFrame extends javax.swing.JFrame {
         TotalTable.getColumnModel().getColumn(1).setPreferredWidth(150);
     }
 
-    private DefaultTableModel rebrandModel() {
-        DefaultTableModel model = new DefaultTableModel() {
-
-            boolean[] canEdit = new boolean[]{
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
-            }
-
-            public Class getColumnClass(int column) {
-                return getValueAt(0, column).getClass();
-            }
-        };
-        Object[] columns = new Object[18];
-        columns[0] = "status";
-        columns[1] = "ΚΩΔΙΚΟΣ";
-        columns[2] = "ΠΕΡΙΓΡΑΦΗ";
-        columns[3] = "ΚΑΘΑΡΙΣΜΑ";
-        columns[4] = "ΦΥΛΑΞΗ";
-        columns[5] = "ΕΠΙΔΙΟΘΡΩΣΗ";
-        columns[6] = "ΤΙΜΗ ΓΙΑ ΚΑΘΑΡΙΣΜΑ";
-        columns[7] = "ΤΙΜΗ ΓΙΑ ΦΥΛΑΞΗ";
-        columns[8] = "ΤΙΜΗ ΓΙΑ ΕΠΙΔΙΟΡΘΩΣΗ";
-
-        columns[9] = "ΜΗΚΟΣ";
-        columns[10] = "ΠΛΑΟΤΟΣ";
-        columns[11] = "ΤΕΤΡΑΓΩΝΙΚΑ";
-
-        columns[12] = "ΧΡΕΩΣΗ ΓΙΑ ΚΑΘΑΡΙΣΜΑ";
-        columns[13] = "ΧΡΕΩΣΗ ΓΙΑ ΦΥΛΑΞΗ";
-        columns[14] = "ΧΡΕΩΣΗ ΓΙΑ ΕΠΙΔΙΟΡΘΩΣΗ";
-        columns[15] = "ΣΗΜΕΙΩΜΑ";
-
-        columns[16] = "ΣΥΝΟΛΟ ΧΡΕΩΣΗΣ ΤΕΜΑΧΙΟΥ";
-        columns[17] = "-";
-        model.setColumnIdentifiers(columns);
-        ItemController itemController = new ItemController();
-        ArrayList<Item> items = itemController.getCustomerItems(Integer.parseInt(tf_CustomerId.getText()));
-        for (Item item : items) {
-            Object[] row = new Object[18];
-            row[0] = item.getStatus();
-            row[1] = item.getItemCode();
-            row[2] = item.getProduct_description();
-            row[3] = item.getCleaning();
-            row[4] = item.getStoring();
-            row[5] = item.getMending();
-
-            row[6] = item.getCleaning_price();
-            row[7] = item.getStoring_price();
-            row[8] = item.getMending_price();
-
-            row[9] = item.getLength();
-            row[10] = item.getWidth();
-            Double s = item.getLength() * item.getWidth();
-            row[11] = s;
-            Double a, b, c;
-            row[12] = a = s * item.getCleaning_price();
-            row[13] = b = s * item.getStoring_price();
-            row[14] = c = s * item.getMending_price();
-
-            row[15] = item.getNote();
-
-            row[16] = a + b + c;
-
-            if (item.getStatus().equals("ready")) {
-                row[17] = Boolean.TRUE;
-            } else {
-                row[17] = Boolean.FALSE;
-            }
-
-            model.addRow(row);
-
-        }
-        return model;
-    }
-
     private JComponent createTable(DefaultTableModel model) {
 
-        MyTable table = new MyTable(model);
+        JTable table = new JTable(model) {
+
+            @Override
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                Component c = super.prepareRenderer(renderer, row, column);
+
+                //  Color row based on a cell value
+                if (!isRowSelected(row)) {
+                    c.setBackground(getBackground());
+                    int modelRow = convertRowIndexToModel(row);
+                    String type = (String) getModel().getValueAt(modelRow, 0);
+                    boolean oop = (boolean) getModel().getValueAt(modelRow, 17);
+
+                    if (!"ready".equals(type)) {
+                        //model.setValueAt(false, modelRow, 17);
+                        c.setBackground(Color.RED);
+                    }
+
+                    if (oop) {
+                        c.setBackground(Color.GREEN);
+                    }
+
+                }
+
+                if (isRowSelected(row)) {
+                    //   c.setBackground(getBackground());
+                    int modelRow = convertRowIndexToModel(row);
+                    String type = (String) getModel().getValueAt(modelRow, 0);
+                    boolean oop = (boolean) getModel().getValueAt(modelRow, 17);
+
+                    if (!"ready".equals(type)) {
+                        // model.setValueAt(false, modelRow, 17);
+                        c.setBackground(Color.PINK);
+
+                    }
+
+                }
+
+                return c;
+            }
+        };
+
+        table.getModel()
+                .addTableModelListener(
+                        new TableModelListener() {
+                    int x = 0;
+
+                    public void tableChanged(TableModelEvent evt) {
+                        System.out.println(evt.getClass().toString() + "---" + x);
+                        x++;
+                    }
+                }
+                );
 
         table.setPreferredScrollableViewportSize(table.getPreferredSize());
         table.setRowHeight(26);

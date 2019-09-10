@@ -24,20 +24,7 @@ public class MyTable extends JTable {
     public MyTable(DefaultTableModel model) {
 
         this.model = model;
-        addPropertyChangeListener(new PropertyChangeListener() {
 
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                System.out.println("-----"+evt.getPropertyName());
-                if ("tableCellEditor".equals(evt.getPropertyName())) {
-                    if (isEditing()) {
-                        processEditingStarted();
-                    } else {
-                        processEditingStopped();
-                    }
-                }
-            }
-        });
     }
 
     public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
@@ -72,13 +59,6 @@ public class MyTable extends JTable {
         return c;
     }
 
-    protected void processEditingStopped() {
-        System.out.println("save " + editingRow + ":" + editingColumn);
-    }
-
-    protected void processEditingStarted() {
-        System.out.println("edit " + editingRow + ":" + editingColumn);
-
-    }
+ 
 
 }
