@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -1547,21 +1548,11 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         Panel.removeAll();
-        DefaultTableModel model = new DefaultTableModel() {
 
-//overrideing for all the columns except 17 to be uneditable, and all the rows that are not 'ready' also uneditable 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                if (columnIndex == 17) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            public Class getColumnClass(int column) {
-                return getValueAt(0, column).getClass();
-            }
-        };
+        //i override some methodes, one more i had to overload, this is
+//nuts. I had to create all this, just so i could have some cells editable and some not,
+//why it could not be like model.setCellEditable(x,y)
+        MyDefaultModel myModel = new MyDefaultModel();
 
         Object[] columns = new Object[18];
         columns[0] = "status";
@@ -1585,7 +1576,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         columns[16] = "ΣΥΝΟΛΟ ΧΡΕΩΣΗΣ ΤΕΜΑΧΙΟΥ";
         columns[17] = "-";
-        model.setColumnIdentifiers(columns);
+        myModel.setColumnIdentifiers(columns);
+
         ItemController itemController = new ItemController();
         ArrayList<Item> items = itemController.getCustomerItems(Integer.parseInt(tf_CustomerId.getText()));
         for (Item item : items) {
@@ -1613,22 +1605,23 @@ public class MainFrame extends javax.swing.JFrame {
             row[15] = item.getNote();
 
             row[16] = a + b + c;
-
+            boolean status;
             if (item.getStatus().equals("ready")) {
-                row[17] = Boolean.TRUE;
+                row[17] = status = Boolean.TRUE;
             } else {
-                row[17] = Boolean.FALSE;
+                row[17] = status = Boolean.FALSE;
             }
 
-            model.addRow(row);
+            myModel.addRow(row, status);
+            //   model.addRow(row, status);
 
         }
-        JScrollPane sc = (JScrollPane) createTable(model);
+        JScrollPane sc = (JScrollPane) createTable(myModel);
 
         Panel.add(sc);
         Panel.setLayout(new BoxLayout(Panel, BoxLayout.LINE_AXIS));
         pack();
-        countTotal(model);
+        countTotal(myModel);
 
     }//GEN-LAST:event_jButton12ActionPerformed
 
@@ -1644,7 +1637,12 @@ public class MainFrame extends javax.swing.JFrame {
         System.out.println(rowCount);
 
         for (int x = 0; x < rowCount; x++) {
+            if (!Boolean.valueOf(model.getValueAt(x, 17).toString())) {
+                continue;
+            }
+
             total = total + Double.valueOf(model.getValueAt(x, 16).toString());
+
         }
         TotalTable.getModel().setValueAt(String.valueOf(total), 0, 1);
 
@@ -1700,17 +1698,17 @@ public class MainFrame extends javax.swing.JFrame {
             }
         };
 
-        table.getModel()
-                .addTableModelListener(
-                        new TableModelListener() {
-                    int x = 0;
+        table.getModel().addTableModelListener(
+                new TableModelListener() {
+            int x = 0;
 
-                    public void tableChanged(TableModelEvent evt) {
-                        System.out.println(evt.getClass().toString() + "---" + x);
-                        x++;
-                    }
-                }
-                );
+            public void tableChanged(TableModelEvent evt) {
+                countTotal((DefaultTableModel) table.getModel());
+                System.out.println(evt.getClass().toString() + "---" + x);
+                x++;
+            }
+        }
+        );
 
         table.setPreferredScrollableViewportSize(table.getPreferredSize());
         table.setRowHeight(26);
