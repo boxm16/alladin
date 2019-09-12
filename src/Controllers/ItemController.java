@@ -29,18 +29,22 @@ public class ItemController {
     }
 
     public void insertItemsDimensions(ArrayList<Item> itemsList) {
-    
-    
-    itemDao.insertItemsDimesnions(itemsList);
-    
+
+        itemDao.insertItemsDimesnions(itemsList);
+
     }
 
     public ArrayList<Item> getCustomerItems(int customer_id) {
-   ArrayList<Item> itemList=new ArrayList();
-   
-   itemList=itemDao.getItemList(customer_id);
-   
-   return itemList; 
+        ArrayList<Item> itemList = new ArrayList();
+
+        itemList = itemDao.getItemList(customer_id);
+
+        return itemList;
+    }
+
+    public ArrayList<Item> getAllItems() {
+ArrayList<Item> items=itemDao.getAllItems();
+return items;
     }
 
 }
